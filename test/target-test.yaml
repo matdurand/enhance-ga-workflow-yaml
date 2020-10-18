@@ -1,0 +1,24 @@
+services:
+  nodeinfo:
+    image: 'functions/nodeinfo:latest'
+    labels:
+      function: 'true'
+    environment:
+      no_proxy: gateway
+      https_proxy: true
+    deploy:
+      placement:
+        constraints:
+          - node.platform.os == linux
+  echoit:
+    image: 'functions/alpine:health'
+    labels:
+      function: 'true'
+    environment:
+      fprocess: cat
+      no_proxy: gateway
+      https_proxy: false
+    deploy:
+      placement:
+        constraints:
+          - node.platform.os == linux

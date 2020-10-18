@@ -1,0 +1,20 @@
+services:
+  # Node.js gives OS info about the node (Host)
+  nodeinfo: &function
+    image: functions/nodeinfo:latest
+    labels:
+      function: "true"
+    environment:
+      no_proxy: "gateway"
+      https_proxy: true
+    deploy:
+      placement:
+        constraints:
+          - 'node.platform.os == linux'  # Uses `cat` to echo back response, fastest function to execute.
+  echoit:
+    <<: *function
+    image: functions/alpine:health
+    environment:
+      fprocess: "cat"
+      no_proxy: "gateway"
+      https_proxy: false
