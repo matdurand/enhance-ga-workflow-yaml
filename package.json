@@ -1,31 +1,39 @@
 {
-  "name": "expand-staged-yaml",
+  "name": "enhance-ga-workflow-yaml",
   "version": "1.0.0",
   "description": "Expand a yaml file when the source file is staged in git",
   "main": "dist/index.js",
   "scripts": {
     "build": "bili",
-    "test": "node src/index.js -s test/source-test.yaml -t test/target-test.yaml -a"
+    "update-ga-workflows": "node src/index.js -s .github/enhanced-workflows/test.yaml -t .github/workflows/test.yaml -v",
+    "release": "npm run build && npm publish"
   },
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/matdurand/expand-staged-yaml.git"
+    "url": "https://github.com/matdurand/enhance-ga-workflow-yaml.git"
   },
   "author": "matdurand",
   "license": "MIT",
   "devDependencies": {
     "bili": "4.8.1",
-    "commander": "6.1.0"
+    "commander": "6.1.0",
+    "husky": "4.3.0"
   },
   "dependencies": {
     "js-yaml": "3.14.0",
-    "simple-git": "^2.21.0",
-    "staged-git-files": "1.2.0"
+    "simple-git": "2.21.0",
+    "staged-git-files": "1.2.0",
+    "yaml-import": "^2.0.0"
   },
   "release": {
     "branch": "master"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run update-ga-workflows"
+    }
   }
 }

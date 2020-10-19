@@ -8,7 +8,7 @@ const config = {
   output: {
     fileName: "index.js",
     format: ["cjs"],
-    moduleName: "expand-staged-yaml"
+    moduleName: "enhance-ga-workflow-yaml"
   }
 };
 
